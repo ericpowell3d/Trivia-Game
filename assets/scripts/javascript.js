@@ -287,18 +287,14 @@ var questions = [{
 
 var choices = [];
 
-// Load in random questions from that object array and push them to a new object array to be placed into the current session (To create variation)
-// Question counter that calls the new object array of questions in order
-// 10-15 second timer that starts when the user hits "Begin" or "Next Question"
-// If the user clicks a choice, timer terminates and shows result (If right +1, if wrong +0)
-// If timer runs out, create no choice given result (same function as above, but no choice given)
-// Whether a choice was made or timer runs out, add a "Next Question" button
-// After the 20th question is answered, change the "Next Question" button to "See Results"
-// Make results page with attributes like: Correct, Incorrect, Percentage, Rank (Have "Play Again" button take you to the start point)
+// BUTTONS - [Begin, Next Question, Final Results, Play Again], [Multiple Choice]
 
-// BUTTONS - Begin, Next Question, See Results, Play Again, [Multiple Choice]
+// STATES - Start/Reset, Question, Result, Final Result
 
-// STATES - Start/Reset, Timed Question, Question Result, Full Result
+    // START/RESET - Title, Welcome & Description, Begin Button
+    // QUESTION - Title, Timer, Question, Choices
+    // RESULT - Title, Timer, Question, Result of Choice, Correct Answer, Next Button (Final Results button at 20)
+    // FINAL RESULT - Title, Rank, Percentage, Amount Correct, Amount Incorrect, Play Again Button
 
 const TIMER = 10000;
 
@@ -307,7 +303,7 @@ var questionTimer;
 
 var intervalId;
 var timeRunning = false;
-var timeCount = TIMER / 1000;
+var timer = TIMER / 1000;
 
 var userChoice = "";
 
@@ -333,34 +329,24 @@ function shuffle(array) {
     return array;
 }
 
-function count() {
-
-  // DONE: increment time by 1, remember we cant use "this" here.
-  timeCount--;
-
-  // DONE: Get the current time, pass that into the timeConverter function,
-  //       and save the result in a variable.
-  var timeConvert = timeConverter(timeCount);
-  console.log(timeConvert);
-
-  // DONE: Use the variable we just created to show the converted time in the "display" div.
-  $("#clock").text("Time Left: " + timeConvert);
+function timeCount() {
+    timer--;
+    var timeConvert = timeConverter(timer);
+    $("#clock").text("Time Left: " + timeConvert);
 }
 function timeConverter(t) {
-  var minutes = Math.floor(t / 60);
-  var seconds = t - (minutes * 60);
-
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  if (minutes === 0) {
-    minutes = "00";
-  }
-  else if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-
-  return minutes + ":" + seconds;
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 60);
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    if (minutes === 0) {
+        minutes = "00";
+    }
+    else if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    return `${minutes}:${seconds}`;
 }
 
 function start() {
@@ -376,27 +362,27 @@ function start() {
 function next() {
     // Render question first
     questionCount++
+    console.log("Question #" + (questionCount+1));
     userChoice = "";
     $("#resultChoice").text("");
     $("#resultCorrect").text("");
 
     choices = [questions[questionCount].choice0, questions[questionCount].choice1, questions[questionCount].choice2, questions[questionCount].choice3];
     choices = shuffle(choices);
-    console.log(questions);
 
     $("#question").text(questions[questionCount].question);
-    $("#choiceA").text(choices[0]);
-    $("#choiceB").text(choices[1]);
-    $("#choiceC").text(choices[2]);
-    $("#choiceD").text(choices[3]);
+    $(".choiceBtn").append(`<button class="choice" id="${choices[0]}">${choices[0]}</button>`);
+    $(".choiceBtn").append(`<button class="choice" id="${choices[1]}">${choices[1]}</button>`);
+    $(".choiceBtn").append(`<button class="choice" id="${choices[2]}">${choices[2]}</button>`);
+    $(".choiceBtn").append(`<button class="choice" id="${choices[3]}">${choices[3]}</button>`);
 
     // Start timer after
     if (!timeRunning) {
-        timeCount = TIMER / 1000;
-        $("#clock").text("Time Left: 00:" + timeCount);
-        intervalId = setInterval(count, 1000);
+        timer = TIMER / 1000;
+        intervalId = setInterval(timeCount, 1000);
         questionTimer = setTimeout(result, TIMER);
         timeRunning = true;
+        $("#clock").text("Time Left: 00:" + timer);
     }
 }
 
@@ -406,7 +392,8 @@ function result() {
     clearTimeout(questionTimer);
     timeRunning = false;
     // Set userChoice based on the button clicked
-    userChoice = questions[questionCount].choice0;
+    userGuess = $(this).attr("id");
+    $(".choiceBtn").empty();
     // Check if timed out
     if (userChoice === "") {
         wrong++;
@@ -435,6 +422,10 @@ function finalResult() {
 
 $(document).ready(function(){
     start();
-    $(".btn-primary").click(next); // Action of hitting the Next Button
-    $(".btn-danger").click(result); // Action of choosing an answer
+    $("#begin").click(next); // Action of hitting the Begin Button
+    $("#next").click(next); // Action of hitting the Next Button
+    $("#final").click(finalResult); // Action of hitting the Final Results Button
+    $("#again").click(start); // Action of hitting the Play Again Button
 });
+
+$(document).on("click", ".choice", result); // Action of choosing an answer

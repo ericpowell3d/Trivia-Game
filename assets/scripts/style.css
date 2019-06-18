@@ -9,3 +9,40 @@ body {
     line-height: 1.5em;
     color: #323232;
 }
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    padding: 24px;
+    margin: 0 auto;
+    color: #555;
+    background: #ccc;
+    box-shadow: #00000064 0px 2px 4px;
+}
+
+.choiceBtn button {
+    font-size: 20px;
+    padding: 16px;
+    border: 0 none;
+    margin: 24px 0;
+    color: #555;
+    background: #ccc;
+    border-radius: 8px;
+    box-shadow: #00000080 0px 2px 4px;
+}
+
+.mainBtn button {
+    font-size: 20px;
+    padding: 16px;
+    border: 0 none;
+    margin: 24px 0;
+    color: #555;
+    background: #ccc;
+    border-radius: 8px;
+    box-shadow: #00000080 0px 2px 4px;
+}
+.mainBtn button:hover {
+    color: #323232;
+    background: #999;
+}

@@ -10,7 +10,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/scripts/reset.css">
   <link rel="stylesheet" type="text/css" href="assets/scripts/style.css">
 
   <!-- FONTS -->
@@ -24,67 +24,26 @@
 <!-- Start Body of Document -->
 <body>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>Super Smash Bros. Trivia!</h1>
-      </div>
+  <div class="all">
+    <div class="title">
+      <h1 id="title">Super Smash Bros. Trivia!</h1>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <p id="clock">Time Left: 00:10</p>
-      </div>
+    <div class="clock">
+      <p id="clock">Time Left: 00:10</p>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <p id="question"></p>
-      </div>
+    <div class="question">
+      <p id="question"></p>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <p id="resultChoice"></p>
-      </div>
+    <div class="result">
+      <p id="resultChoice"></p>
+      <p id="resultCorrect"></p>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <p id="resultCorrect"></p>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-secondary btn-lg" id="choiceA"></button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-secondary btn-lg" id="choiceB"></button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-secondary btn-lg" id="choiceC"></button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-secondary btn-lg" id="choiceD"></button>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-primary">Start Me</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button class="btn btn-danger">Stop Me</button>
-      </div>
+    <div class="choiceBtn"></div>
+    <div class="mainBtn">
+      <button id="begin">Begin</button>
+      <button id="next">Next Question</button>
+      <button id="final">Final Results</button>
+      <button id="again">Play Again</button>
     </div>
   </div>
 
