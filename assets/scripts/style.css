@@ -11,25 +11,38 @@ body {
 }
 
 .title {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: bold;
     width: 100%;
-    padding: 24px;
+    padding: 20px;
     margin: 0 auto;
     color: #555;
-    background: #ccc;
-    box-shadow: #00000064 0px 2px 4px;
+    background: #eee;
+    border-bottom: solid #ddd 10px;
 }
 
+.choiceBtn {
+    width: 50%;
+    margin: auto;
+    margin-top: 16px
+}
 .choiceBtn button {
     font-size: 20px;
+    font-weight: bold;
+    width: 460px;
     padding: 16px;
     border: 0 none;
-    margin: 24px 0;
+    margin: 8px;
+    position: relative;
     color: #555;
-    background: #ccc;
+    background: #fdb;
     border-radius: 8px;
     box-shadow: #00000080 0px 2px 4px;
+}
+.choiceBtn button:hover {
+    color: #323232;
+    background: #beb;
+    box-shadow: #000000a0 0px 2px 4px;
 }
 
 .mainBtn button {
@@ -43,6 +56,41 @@ body {
     box-shadow: #00000080 0px 2px 4px;
 }
 .mainBtn button:hover {
-    color: #323232;
-    background: #999;
+    color: #fff;
+    background: #808080;
+    box-shadow: #000000cc 0px 2px 4px;
+}
+
+.clock {
+    font-size: 30px;
+    width: 280px;
+    margin: 0 auto;
+    margin-top: 48px;
+    color: #fff;
+    background: #808080;
+    border-radius: 8px;
+}
+
+#clock {
+    padding: 20px;
+}
+
+.question {
+    font-size: 24px;
+    margin-top: 48px;
+}
+
+#resultChoice {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+#resultCorrect {
+    font-size: 24px;
+    margin-top: 24px;
+}
+.result img {
+    max-width: 512px;
+    max-height: 256px;
+    margin-top: 24px;
 }

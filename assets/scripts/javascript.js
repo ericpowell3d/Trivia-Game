@@ -116,7 +116,7 @@ var questions = [{
     choice2: "8",
     choice3: "0"
 }, {
-    question: "Do we tech those in Ultimate?",
+    question: "Do we tech those in Smash Ultimate?",
     image: "https://vangogh.teespring.com/shirt_pic/5991508/6926236/2/2397/480x9999/front.jpg?v=2016-07-01-02-18",
     choice0: "Only when the game lets me",
     choice1: "Always",
@@ -256,7 +256,7 @@ var questions = [{
     choice2: "1",
     choice3: "5"
 }, {
-    question: "What was the slogan during for the ad campaign of Smash Ultimate?",
+    question: "What was the slogan during the ad campaign for Smash Ultimate?",
     image: "https://i.ytimg.com/vi/EXnbMp1yr1k/maxresdefault.jpg",
     choice0: "Everyone is Here!",
     choice1: "Bash, Thrash & Smash!",
@@ -287,8 +287,6 @@ var questions = [{
 
 var choices = [];
 
-// BUTTONS - [Begin, Next Question, Final Results, Play Again], [Multiple Choice]
-
 // STATES - Start/Reset, Question, Result, Final Result
 
     // START/RESET - Title, Welcome & Description, Begin Button
@@ -305,11 +303,10 @@ var intervalId;
 var timeRunning = false;
 var timer = TIMER / 1000;
 
-var userChoice = "";
+var userChoice = undefined;
 
 var right = 0;
 var wrong = 0;
-var ranks = ["Uncultured Swine","Filthy Casual","Regular Bro","Elite Smasher","Smash Lore-ologist"]
 
 // Algorithm that randomly shuffles the questions array (Fisher-Yates Shuffle)
 function shuffle(array) {
@@ -350,6 +347,8 @@ function timeConverter(t) {
 }
 
 function start() {
+    hideHTML();
+
     questions = shuffle(questions);
     console.log(questions);
 
@@ -357,15 +356,18 @@ function start() {
     choiceIndex = 0;
     right = 0;
     wrong = 0;
+
+    $(".overview").show();
+    $(".mainBtn").append(`<button id="next">Begin</button>`);
 }
 
 function next() {
-    // Render question first
+    // Render question
+    hideHTML();
+
     questionCount++
     console.log("Question #" + (questionCount+1));
-    userChoice = "";
-    $("#resultChoice").text("");
-    $("#resultCorrect").text("");
+    userChoice = undefined;
 
     choices = [questions[questionCount].choice0, questions[questionCount].choice1, questions[questionCount].choice2, questions[questionCount].choice3];
     choices = shuffle(choices);
@@ -376,7 +378,10 @@ function next() {
     $(".choiceBtn").append(`<button class="choice" id="${choices[2]}">${choices[2]}</button>`);
     $(".choiceBtn").append(`<button class="choice" id="${choices[3]}">${choices[3]}</button>`);
 
-    // Start timer after
+    $(".clock").show();
+    $(".question").show();
+
+    // Start timer
     if (!timeRunning) {
         timer = TIMER / 1000;
         intervalId = setInterval(timeCount, 1000);
@@ -387,45 +392,82 @@ function next() {
 }
 
 function result() {
-    // Clear timer first
+    // Set userChoice based on the button clicked
+    userChoice = $(this).attr("id");
+    hideHTML();
+    // Clear timer
     clearInterval(intervalId);
     clearTimeout(questionTimer);
     timeRunning = false;
-    // Set userChoice based on the button clicked
-    userGuess = $(this).attr("id");
-    $(".choiceBtn").empty();
     // Check if timed out
-    if (userChoice === "") {
+    if (userChoice === undefined) {
         wrong++;
         $("#resultChoice").text("Out of Time!");
+        $("#resultChoice").css("color", "#ff8000");
     }
     // Check if right answer
     else if (userChoice === questions[questionCount].choice0) {
         right++;
         $("#resultChoice").text("Correct!");
+        $("#resultChoice").css("color", "#00cc80");
     }
     // Check if wrong answer
     else {
         wrong++;
         $("#resultChoice").text("Wrong!");
+        $("#resultChoice").css("color", "#ff0000");
     }
     // Render answer
     $("#resultCorrect").text("The answer is... " + questions[questionCount].choice0);
-    console.log("Right Answers: " + right);
-    console.log("Wrong Answers: " + wrong);
-    console.log("You chose: " + userChoice);
+
+    if (questionCount < 19)
+        $(".mainBtn").append(`<button id="next">Next Question</button>`);
+    else
+        $(".mainBtn").append(`<button id="end">Final Results</button>`);
+
+    $("#resultImg").attr("src", questions[questionCount].image);
+
+    $(".clock").show();
+    $(".question").show();
+    $(".result").show();
 }
 
 function finalResult() {
+    hideHTML();
+    if (right <= 8)
+        $("#finalRank").text("Rank: Uncultured Swine!");
+    if (right > 8 && right <= 12)
+        $("#finalRank").text("Rank: Filthy Casual!");
+    if (right > 12 && right <= 15)
+        $("#finalRank").text("Rank: Average Bro!");
+    if (right > 15 && right <= 18)
+        $("#finalRank").text("Rank: Elite Smasher!");
+    if (right > 18 && right <= 20)
+        $("#finalRank").text("Rank: Smash Lore-ologist!");
 
+    $("#finalPercent").text("Score: " + (right * 5) + "%");
+    $("#finalRight").text("Correct: " + right);
+    $("#finalWrong").text("Incorrect: " + wrong);
+
+    $(".final").show();
+    $(".mainBtn").append(`<button id="again">Play Again</button>`);
+}
+
+function hideHTML() {
+    $(".overview").hide();
+    $(".clock").hide();
+    $(".question").hide();
+    $(".choiceBtn").empty();
+    $(".result").hide();
+    $(".final").hide();
+    $(".mainBtn").empty();
 }
 
 $(document).ready(function(){
     start();
-    $("#begin").click(next); // Action of hitting the Begin Button
-    $("#next").click(next); // Action of hitting the Next Button
-    $("#final").click(finalResult); // Action of hitting the Final Results Button
-    $("#again").click(start); // Action of hitting the Play Again Button
 });
 
 $(document).on("click", ".choice", result); // Action of choosing an answer
+$(document).on("click", "#next", next); // Action of hitting the Next Button
+$(document).on("click", "#end", finalResult); // Action of hitting the Final Results Button
+$(document).on("click", "#again", start); // Action of hitting the Play Again Button
