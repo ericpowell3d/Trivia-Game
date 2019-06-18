@@ -404,14 +404,13 @@ function result() {
     // Hide HTML
     hideHTML();
 
-    // Set userChoice based on the button clicked
-    userChoice = $(this).text();
-    console.log(userChoice);
-
     // Clear timers
     clearInterval(intervalTimer);
     clearTimeout(questionTimer);
     timeRunning = false;
+
+    // Set userChoice based on the button clicked
+    userChoice = $(this).text();
 
     // Check if timed out, right, or wrong
     if (userChoice === "") {

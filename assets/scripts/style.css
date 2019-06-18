@@ -64,7 +64,7 @@ body {
 .choiceBtn button:hover {
     color: #323232;
     background: #bbe;
-    box-shadow: #000000a0 0px 2px 4px;
+    box-shadow: #00000080 0px 2px 4px;
 }
 
 .mainBtn button {
