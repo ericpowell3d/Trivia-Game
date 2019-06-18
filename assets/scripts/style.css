@@ -8,28 +8,50 @@ body {
     font-size: 24px;
     line-height: 1.5em;
     color: #323232;
+    background: url(../images/ball.png);
+    background-size: 800px;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 148px;
+    background-blend-mode: screen;
+    background-color: #ffffffdd;
 }
 
 .title {
     font-size: 36px;
     font-weight: bold;
     width: 100%;
-    padding: 20px;
+    padding: 12px;
     margin: 0 auto;
     color: #555;
     background: #eee;
     border-bottom: solid #ddd 10px;
 }
+#title {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.overview {
+    padding: 24px;
+    margin-top: 80px;
+    background: #bbbbbba0;
+}
+#overview {
+    font-family: 'Roboto Condensed', sans-serif;
+    width: 1000px;
+    margin: auto;
+}
 
 .choiceBtn {
-    width: 50%;
+    width: 420px;
     margin: auto;
     margin-top: 16px
 }
 .choiceBtn button {
     font-size: 20px;
     font-weight: bold;
-    width: 460px;
+    width: 400px;
     padding: 16px;
     border: 0 none;
     margin: 8px;
@@ -41,7 +63,7 @@ body {
 }
 .choiceBtn button:hover {
     color: #323232;
-    background: #beb;
+    background: #bbe;
     box-shadow: #000000a0 0px 2px 4px;
 }
 
@@ -50,34 +72,42 @@ body {
     padding: 16px;
     border: 0 none;
     margin: 24px 0;
-    color: #555;
-    background: #ccc;
-    border-radius: 8px;
-    box-shadow: #00000080 0px 2px 4px;
-}
-.mainBtn button:hover {
     color: #fff;
     background: #808080;
+    border-radius: 8px;
     box-shadow: #000000cc 0px 2px 4px;
+}
+.mainBtn button:hover {
+    color: #323232;
+    background: #bbe;
+    box-shadow: #00000080 0px 2px 4px;
 }
 
 .clock {
-    font-size: 30px;
-    width: 280px;
+    font-size: 24px;
+    width: 240px;
     margin: 0 auto;
-    margin-top: 48px;
+    margin-top: 36px;
     color: #fff;
-    background: #808080;
+    background: #804080;
     border-radius: 8px;
 }
 
 #clock {
-    padding: 20px;
+    padding: 14px;
 }
 
 .question {
     font-size: 24px;
+    margin: auto;
     margin-top: 48px;
+}
+#question {
+    padding: 12px;
+    border: 0;
+    margin: auto;
+    color: #323232;
+    border-radius: 8px;
 }
 
 #resultChoice {
@@ -87,10 +117,30 @@ body {
 }
 #resultCorrect {
     font-size: 24px;
-    margin-top: 24px;
+    margin-top: 12px;
 }
 .result img {
     max-width: 512px;
     max-height: 256px;
     margin-top: 24px;
+}
+
+#finalRank {
+    font-size: 36px;
+    padding: 16px;
+    margin-top: 64px;
+    color: #fff;
+}
+#finalPercent {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 48px;
+}
+#finalRight {
+    font-size: 24px;
+    margin-top: 48px;
+}
+#finalWrong {
+    font-size: 24px;
+    margin-bottom: 24px;
 }
