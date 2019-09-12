@@ -65,6 +65,7 @@ body {
     color: #323232;
     background: #bbe;
     box-shadow: #00000080 0px 2px 4px;
+    cursor: pointer;
 }
 
 .mainBtn button {
@@ -81,6 +82,7 @@ body {
     color: #323232;
     background: #bbe;
     box-shadow: #00000080 0px 2px 4px;
+    cursor: pointer;
 }
 
 .clock {
