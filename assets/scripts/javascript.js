@@ -115,10 +115,10 @@ var questions = [{
     choice2: "8",
     choice3: "0"
 }, {
-    question: "Do we tech those in Smash Ultimate?",
+    question: "Do we tech those?",
     image: "https://vangogh.teespring.com/shirt_pic/5991508/6926236/2/2397/480x9999/front.jpg?v=2016-07-01-02-18",
-    choice0: "Only when the game lets me",
-    choice1: "Always",
+    choice0: "Always",
+    choice1: "Sometimes",
     choice2: "Im uncultured, so I don't get this",
     choice3: "Never"
 }, {
