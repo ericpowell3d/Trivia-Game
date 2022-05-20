@@ -4,4 +4,4 @@ Test your knowledge of Super Smash Brothers in this trivia game!
 
 ### Deployed Site
 
-https://ericpowell3d.github.io/Super-Smash-Trivia
+https://ericpowelldev.github.io/Bootcamp_Super-Smash-Trivia/
